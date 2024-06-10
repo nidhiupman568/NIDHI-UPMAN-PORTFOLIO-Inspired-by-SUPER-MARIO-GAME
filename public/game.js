@@ -6,7 +6,7 @@ var direction = false;
 var music_play = false;
 var interval_left = false;
 var interval_right = false;
-
+var jumping = false;
 
 if (ismobile) scroll_x -= 170;
 else scroll_x -= 240;
@@ -19,11 +19,9 @@ $('.tweet').click(function () {
 });
 
 function moveTo(pos) {
-
     diff = ismobile ? 10 : 15;
 
     if (pos == 'left') {
-
         if (!direction) {
             direction = 'left';
             $('#mario').css('-webkit-transform', 'scaleX(-1)');
@@ -32,9 +30,7 @@ function moveTo(pos) {
         scroll_x += diff;
         mario_x -= 65;
         if (mario_x == -195) mario_x = 0;
-
     } else if (pos == 'right') {
-
         if (!direction) {
             direction = 'right';
             $('#mario').css('-webkit-transform', 'scaleX(1)');
@@ -43,18 +39,14 @@ function moveTo(pos) {
         scroll_x -= diff;
         mario_x -= 65;
         if (mario_x == -195) mario_x = 0;
-
     } else {
         direction = false;
     }
 
-
     // reach end
     if (scroll_x < (parseInt($('#scroll').css('width')) * -1)) {
         scroll_x = $(window).width();
-
-
-        // reach start
+    // reach start
     } else if (scroll_x > $(window).width()) {
         scroll_x = parseInt($('#scroll').css('width')) * -1;
     }
@@ -63,7 +55,6 @@ function moveTo(pos) {
     $('#floor').css('background-position-x', floor_x + 'px');
     $('#mario').css('background-position-x', mario_x + 'px');
 }
-
 
 function playMusic() {
     if (!music_play) {
@@ -74,7 +65,6 @@ function playMusic() {
 
 function moveLeft() {
     playMusic();
-
     direction = false;
     if (!interval_left) {
         interval_left = setInterval(function () {
@@ -85,7 +75,6 @@ function moveLeft() {
 
 function moveRight() {
     playMusic();
-
     direction = false;
     if (!interval_right) {
         interval_right = setInterval(function () {
@@ -101,11 +90,18 @@ function stopMove() {
     interval_right = false;
 }
 
-
-
+function jump() {
+    if (!jumping) {
+        jumping = true;
+        $('#mario').addClass('jump');
+        setTimeout(function () {
+            $('#mario').removeClass('jump');
+            jumping = false;
+        }, 600); // Match this duration with the CSS animation duration
+    }
+}
 
 $(function () {
-
     $("body, #scroll").click(function () {
         playMusic();
     });
@@ -115,6 +111,8 @@ $(function () {
             moveLeft();
         } else if (e.keyCode == 39) {
             moveRight();
+        } else if (e.keyCode == 32) {
+            jump();
         }
     });
 
@@ -133,5 +131,4 @@ $(function () {
     $('#btn_left, #btn_right').on('mouseup touchend', function (event) {
         stopMove();
     });
-
 });
