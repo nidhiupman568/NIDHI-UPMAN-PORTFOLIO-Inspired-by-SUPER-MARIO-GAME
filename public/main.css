@@ -19,13 +19,15 @@ b{margin-bottom:15px;font-size:30px;}
     top: 50%;
     margin-top: -200px;
     width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 80px 80px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px; /* Adding a slight border radius for smoother edges */
 }
 
 .box:hover {
     transform: scale(1.1);
     background-color: #f8f9fa;
+    box-shadow: 0 80px 160px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
 .hidden-content {
@@ -42,11 +44,11 @@ b{margin-bottom:15px;font-size:30px;}
     transition: opacity 0.3s ease;
 }
 
-
 .box:hover .hidden-content {
     display: block;
     opacity: 1;
 }
+
 /* Jump animation for Mario */
 @keyframes jump {
     0% { bottom: 0; }
