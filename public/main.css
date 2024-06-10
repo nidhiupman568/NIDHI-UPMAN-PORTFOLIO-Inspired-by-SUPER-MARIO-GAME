@@ -42,6 +42,7 @@ b{margin-bottom:15px;font-size:30px;}
     transition: opacity 0.3s ease;
 }
 
+
 .box:hover .hidden-content {
     display: block;
     opacity: 1;
