@@ -132,3 +132,30 @@ $(function () {
         stopMove();
     });
 });
+var ismobile = navigator.userAgent.match(/(iPhone)|(iPod)|(android)|(webOS)|(BlackBerry)/i);
+var scroll_x = $(window).width() / 2;
+var floor_x = 0;
+var mario_x = 0;
+var direction = false;
+var music_play = false;
+var interval_left = false;
+var interval_right = false;
+var jumping = false;
+
+if (ismobile) scroll_x -= 170;
+else scroll_x -= 240;
+
+$('#scroll').css('left', scroll_x + 'px');
+
+function jump() {
+    if (!jumping) {
+        jumping = true;
+        $('#mario').addClass('jump');
+        setTimeout(function () {
+            $('#mario').removeClass('jump');
+            jumping = false;
+        }, 600); // Match this duration with the CSS animation duration
+    }
+}
+
+// Your existing movement functions like moveLeft(), moveRight(), and event listeners

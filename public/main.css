@@ -11,7 +11,7 @@ b{margin-bottom:15px;font-size:30px;}
 
 .box {
     position: relative;
-    height: 370px;
+    height: 400px;
     float: left;
     background: white;
     padding: 20px;
@@ -64,6 +64,21 @@ b{margin-bottom:15px;font-size:30px;}
 #scroll #mario.jump {
     animation: jump 0.6s ease-in-out;
 }
+
+/* Your existing CSS styles */
+
+#mario.jump {
+    animation: jump 0.6s ease-in-out;
+}
+
+@keyframes jump {
+    0% { bottom: 0; }
+    50% { bottom: 150px; } /* Adjust this value to control the height of the jump */
+    100% { bottom: 0; }
+}
+
+/* Ensure you have styles for other elements as per your game design */
+
 
 
 #btn_left{font-size:80px;color:white;position:fixed;left:0;bottom:-25px;cursor:pointer;}
