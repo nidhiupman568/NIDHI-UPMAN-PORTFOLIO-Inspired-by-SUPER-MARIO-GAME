@@ -101,6 +101,78 @@ function jump() {
     }
 }
 
+// Function to move Mario to the right
+function moveRightArrow() {
+    const mario = document.getElementById('mario');
+    mario.style.left = (parseInt(mario.style.left) || 0) + 10 + 'px';
+}
+
+// Function to move Mario to the left
+function moveLeftArrow() {
+    const mario = document.getElementById('mario');
+    mario.style.left = (parseInt(mario.style.left) || 0) - 10 + 'px';
+}
+
+// Function to make Mario jump
+function jumpArrow() {
+    const mario = document.getElementById('mario');
+    mario.style.bottom = '100px';
+    setTimeout(() => {
+        mario.style.bottom = '0px';
+    }, 500);
+}
+
+// Event listeners for arrow buttons
+document.getElementById('btn_right').addEventListener('click', moveRightArrow);
+document.getElementById('btn_left').addEventListener('click', moveLeftArrow);
+
+// Double-tap to jump
+let lastTap = 0;
+document.addEventListener('touchend', function(event) {
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    if (tapLength < 500 && tapLength > 0) {
+        jumpArrow();
+    }
+    lastTap = currentTime;
+});
+
+// Function to move Mario to the right
+function moveRight() {
+    const mario = document.getElementById('mario');
+    mario.style.left = (parseInt(mario.style.left) || 0) + 10 + 'px';
+}
+
+// Function to move Mario to the left
+function moveLeft() {
+    const mario = document.getElementById('mario');
+    mario.style.left = (parseInt(mario.style.left) || 0) - 10 + 'px';
+}
+
+// Function to make Mario jump
+function jump() {
+    const mario = document.getElementById('mario');
+    mario.style.bottom = '100px';
+    setTimeout(() => {
+        mario.style.bottom = '0px';
+    }, 500);
+}
+
+// Event listeners for arrow buttons
+document.getElementById('btn_right').addEventListener('click', moveRight);
+document.getElementById('btn_left').addEventListener('click', moveLeft);
+
+// Double-tap to jump
+let lastTap2 = 0;
+document.addEventListener('touchend', function(event) {
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap2;
+    if (tapLength < 500 && tapLength > 0) {
+        jump();
+    }
+    lastTap2 = currentTime;
+});
+
 $(function () {
     $("body, #scroll").click(function () {
         playMusic();
