@@ -105,12 +105,14 @@ function jump() {
 function moveRightArrow() {
     const mario = document.getElementById('mario');
     mario.style.left = (parseInt(mario.style.left) || 0) + 10 + 'px';
+    window.scrollBy(10, 0); // Scroll the page to the right
 }
 
 // Function to move Mario to the left
 function moveLeftArrow() {
     const mario = document.getElementById('mario');
     mario.style.left = (parseInt(mario.style.left) || 0) - 10 + 'px';
+    window.scrollBy(-10, 0); // Scroll the page to the left
 }
 
 // Function to make Mario jump
@@ -135,42 +137,6 @@ document.addEventListener('touchend', function(event) {
         jumpArrow();
     }
     lastTap = currentTime;
-});
-
-// Function to move Mario to the right
-function moveRight() {
-    const mario = document.getElementById('mario');
-    mario.style.left = (parseInt(mario.style.left) || 0) + 10 + 'px';
-}
-
-// Function to move Mario to the left
-function moveLeft() {
-    const mario = document.getElementById('mario');
-    mario.style.left = (parseInt(mario.style.left) || 0) - 10 + 'px';
-}
-
-// Function to make Mario jump
-function jump() {
-    const mario = document.getElementById('mario');
-    mario.style.bottom = '100px';
-    setTimeout(() => {
-        mario.style.bottom = '0px';
-    }, 500);
-}
-
-// Event listeners for arrow buttons
-document.getElementById('btn_right').addEventListener('click', moveRight);
-document.getElementById('btn_left').addEventListener('click', moveLeft);
-
-// Double-tap to jump
-let lastTap2 = 0;
-document.addEventListener('touchend', function(event) {
-    const currentTime = new Date().getTime();
-    const tapLength = currentTime - lastTap2;
-    if (tapLength < 500 && tapLength > 0) {
-        jump();
-    }
-    lastTap2 = currentTime;
 });
 
 $(function () {
@@ -204,30 +170,3 @@ $(function () {
         stopMove();
     });
 });
-var ismobile = navigator.userAgent.match(/(iPhone)|(iPod)|(android)|(webOS)|(BlackBerry)/i);
-var scroll_x = $(window).width() / 2;
-var floor_x = 0;
-var mario_x = 0;
-var direction = false;
-var music_play = false;
-var interval_left = false;
-var interval_right = false;
-var jumping = false;
-
-if (ismobile) scroll_x -= 170;
-else scroll_x -= 240;
-
-$('#scroll').css('left', scroll_x + 'px');
-
-function jump() {
-    if (!jumping) {
-        jumping = true;
-        $('#mario').addClass('jump');
-        setTimeout(function () {
-            $('#mario').removeClass('jump');
-            jumping = false;
-        }, 600); // Match this duration with the CSS animation duration
-    }
-}
-
-// Your existing movement functions like moveLeft(), moveRight(), and event listeners
